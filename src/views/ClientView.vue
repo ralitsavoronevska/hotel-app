@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import RoomImagesCarousel from './components/RoomImagesCarousel.vue'
+import RoomImagesCarousel from '@/components/RoomImagesCarousel.vue'
 
 import { ref } from 'vue'
-import HotelFloorMap from './components/HotelFloorMap.vue'
+import HotelFloorMap from '@/components/HotelFloorMap.vue'
 
 // You can later fetch this from real data / props
 const roomName = ref('Room 101')
