@@ -1,0 +1,29 @@
+/* ── Main Gallery ─────────────────────────────────────── */
+.embla-main {
+  @apply relative overflow-hidden rounded-xl; /* or shadow, border etc. */
+}
+
+.embla-main .embla__viewport {
+  @apply overflow-hidden;
+}
+
+.embla-main .embla__container {
+  @apply flex;
+}
+
+.embla-main .embla__slide {
+  @apply flex-[0_0_100%] min-w-0;
+}
+
+.embla-main img {
+  @apply w-full h-auto object-cover aspect-4/3 md:aspect-video rounded-xl;
+  /* Adjust aspect ratio to match your hotel room photos */
+}
+
+.embla__dot {
+  @apply w-3 h-3 rounded-full bg-gray-400/60 transition-all duration-300 hover:bg-gray-300;
+}
+
+.embla__dot--selected {
+  @apply bg-indigo-600 scale-125 shadow-md;
+}
