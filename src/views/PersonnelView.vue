@@ -1,12 +1,24 @@
-<!-- src/views/PersonnelView.vue -->
+<script setup lang="ts">
+import { useRoute } from 'vue-router'
+import { computed } from 'vue'
+
+const route = useRoute()
+
+const nameDecoded = computed(() => {
+  return decodeURIComponent((route.query.name as string) || '')
+})
+</script>
+
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-rose-950 to-purple-950 text-white flex items-center justify-center p-6"
+    class="min-h-screen bg-linear-to-br from-rose-950 to-purple-950 text-white flex items-center justify-center p-6"
   >
     <div class="max-w-4xl text-center">
       <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-8">
         Office Personnel Dashboard
       </h1>
+
+      <p>Welcome back to the Office Personnel Dashboard, {{ nameDecoded }}</p>
 
       <p class="text-xl md:text-2xl opacity-90 mb-12">
         Manage schedules, desks, meetings, access rights, and team availability.

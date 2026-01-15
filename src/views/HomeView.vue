@@ -6,8 +6,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const isHovered = ref(false)
 
-const goToHotel = () => router.push('/hotel-clients')
-const goToOffice = () => router.push('/office-personnel')
+const goToVerificationForm = () => router.push('/verification-form')
 </script>
 
 <template>
@@ -25,13 +24,13 @@ const goToOffice = () => router.push('/office-personnel')
       <div
         class="w-full h-full flex flex-1 flex-col items-center justify-center text-center bg-linear-to-br from-indigo-900 to-purple-900"
         :class="{ 'scale-[1.02] brightness-110': isHovered }"
-        @click="goToHotel"
+        @click="goToVerificationForm"
         @mouseenter="isHovered = true"
         @mouseleave="isHovered = false"
       >
         <div class="max-w-md px-8">
-          <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">Innovative</h1>
-          <p class="text-xl md:text-2xl opacity-90">Solutions for tomorrow's challenges</p>
+          <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-10">Hotel Clients</h1>
+          <p class="text-xl md:text-2xl opacity-90">Enter the hotel management system</p>
         </div>
       </div>
 
@@ -39,13 +38,13 @@ const goToOffice = () => router.push('/office-personnel')
       <div
         class="w-full h-full flex flex-1 flex-col items-center justify-center text-center bg-linear-to-br from-purple-900 to-pink-900"
         :class="{ 'scale-[1.02] brightness-110': isHovered }"
-        @click="goToOffice"
+        @click="goToVerificationForm"
         @mouseenter="isHovered = true"
         @mouseleave="isHovered = false"
       >
         <div class="max-w-md px-8">
-          <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">Built with</h1>
-          <p class="text-xl md:text-2xl opacity-90">Passion & Precision</p>
+          <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-10">Office Personnel</h1>
+          <p class="text-xl md:text-2xl opacity-90">Manage office operations efficiently</p>
         </div>
       </div>
     </div>

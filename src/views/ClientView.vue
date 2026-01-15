@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import RoomImagesCarousel from '@/components/RoomImagesCarousel.vue'
 
-import { ref } from 'vue'
-import HotelFloorMap from '@/components/HotelFloorMap.vue'
+import { useRoute } from 'vue-router'
 
-// You can later fetch this from real data / props
-const roomName = ref('Room 101')
+const route = useRoute()
+
+const nameDecoded = computed(() => {
+  return decodeURIComponent((route.query.name as string) || '')
+})
+const room_number = computed(() => route.query.room_number as number | undefined)
+
 const services = ref([
   { icon: '🍽️', label: 'Restaurant & Bar' },
   { icon: '✨', label: 'Spa & Bar' },
@@ -15,14 +20,25 @@ const services = ref([
   { icon: '🔔', label: 'Guest Service' },
   { icon: '✂️', label: 'In-Room Salon' }, // was missing in your list but visible in screenshot
 ])
+
+const capitalize = (s: string) => {
+  return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''
+}
+
+const name = computed(() => capitalize(nameDecoded.value))
 </script>
 
 <template>
-  <div class="bg-gray-100 font-sans">
+  <div class="page-wrapper px-0! bg-gray-100 font-sans">
     <RoomImagesCarousel />
 
     <!-- Main content -->
-    <div class="bg-gray-100 px-5 p-5 mt-10">
+    <div class="bg-gray-100 mt-10">
+      <h1 class="text-3xl font-bold text-gray-900 mb-5">Room {{ room_number }}</h1>
+      <p class="text-gray-700 mb-8">
+        Welcome to our Awesome Hotel, {{ name }}! Explore our exclusive in-hotel services designed
+        to make your stay unforgettable.
+      </p>
       <h2 class="text-xl font-semibold py-5 text-gray-800">In-Hotel Services</h2>
 
       <div class="grid grid-cols-3 gap-2">
@@ -54,6 +70,4 @@ const services = ref([
       </div>
     </div>
   </div>
-
-  <HotelFloorMap />
 </template>

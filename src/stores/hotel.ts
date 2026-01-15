@@ -6,13 +6,14 @@ interface Room {
   id: string
   name: string
   status: 'free' | 'occupied' | 'reserved' | 'maintenance'
-  coords: [number, number][] // Polygon координати
+  coords: [number, number][]
   details?: string
 }
+
 interface Floor {
   id: number
   name: string
-  image: string // URL на floorplan изображението
+  image: string
   bounds: BoundsLiteral
   rooms: Room[]
 }
@@ -23,7 +24,7 @@ export const useHotelStore = defineStore('hotel', {
       {
         id: 1,
         name: 'Floor 1',
-        image: '/floorplan-level-1.jpg', // Замени с реални изображения
+        image: 'public/floorplan-level-1.jpg',
         bounds: [
           [0, 0],
           [551, 511],
@@ -81,8 +82,8 @@ export const useHotelStore = defineStore('hotel', {
       },
       {
         id: 2,
-        name: 'Етаж 2',
-        image: '/floorplan-level-2.jpg',
+        name: 'Floor 2',
+        image: 'public/floorplan-level-2.jpg',
         bounds: [
           [0, 0],
           [538, 506],
@@ -115,8 +116,8 @@ export const useHotelStore = defineStore('hotel', {
         ],
       },
     ] as Floor[],
-    currentFloorId: 1, // По подразбиране етаж 1
-    selectedStatuses: ['free', 'occupied', 'reserved', 'maintenance'] as Room['status'][], // Всички по подразбиране
+    currentFloorId: 1,
+    selectedStatuses: ['free', 'occupied', 'reserved', 'maintenance'] as Room['status'][],
   }),
   getters: {
     currentFloor: (state) => state.floors.find((floor) => floor.id === state.currentFloorId),

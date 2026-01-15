@@ -33,7 +33,7 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
 
 <template>
   <div
-    class="relative h-[500px] w-full rounded-xl overflow-hidden border border-gray-200 shadow-lg"
+    class="page-wrapper p-6! relative h-[500px] w-full rounded-xl overflow-hidden border-gray-200 shadow-lg"
   >
     <!-- Избор на етаж -->
     <select
