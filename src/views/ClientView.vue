@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import RoomImagesCarousel from '@/components/RoomImagesCarousel.vue'
+import { GUEST_SERVICES } from '@/constants/hotelServices'
+
+const services = ref(GUEST_SERVICES)
 
 import { useRoute } from 'vue-router'
 
@@ -11,16 +14,6 @@ const nameDecoded = computed(() => {
 })
 const room_number = computed(() => route.query.room_number as number | undefined)
 
-const services = ref([
-  { icon: '🍽️', label: 'Restaurant & Bar' },
-  { icon: '✨', label: 'Spa & Bar' },
-  { icon: '🛎️', label: 'In Room Dining' },
-  { icon: '🚗', label: 'Transportation' },
-  { icon: '⏰', label: 'Wake-up Call' },
-  { icon: '🔔', label: 'Guest Service' },
-  { icon: '✂️', label: 'In-Room Salon' }, // was missing in your list but visible in screenshot
-])
-
 const capitalize = (s: string) => {
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''
 }
@@ -29,7 +22,7 @@ const name = computed(() => capitalize(nameDecoded.value))
 </script>
 
 <template>
-  <div class="page-wrapper px-0! bg-gray-100 font-sans">
+  <div class="page-wrapper p-5! bg-gray-100 font-sans">
     <RoomImagesCarousel />
 
     <!-- Main content -->
@@ -44,11 +37,11 @@ const name = computed(() => capitalize(nameDecoded.value))
       <div class="grid grid-cols-3 gap-2">
         <div
           v-for="service in services"
-          :key="service.label"
+          :key="service.title"
           class="flex flex-col items-center text-center gap-2 py-3 px-2 rounded-2xl bg-white hover:bg-indigo-600/15 active:bg-indigo-600/35 transition-colors"
         >
           <div class="text-3xl">{{ service.icon }}</div>
-          <span class="text-sm text-gray-700 font-medium leading-tight">{{ service.label }}</span>
+          <span class="text-sm text-gray-700 font-medium leading-tight">{{ service.title }}</span>
         </div>
       </div>
 

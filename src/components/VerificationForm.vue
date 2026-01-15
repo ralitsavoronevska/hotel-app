@@ -24,7 +24,7 @@ const errorMessage = ref<string | null>(null)
 interface KnownUser {
   fullNameNormalized: string
   role: 'client' | 'administrator'
-  room_number?: number
+  room_number?: number | undefined
   redirectPath: '/hotel-clients' | '/office-personnel'
 }
 
@@ -37,6 +37,7 @@ const knownUsers: KnownUser[] = [
       .replace(/\s+/g, ' ')
       .trim(),
     role: 'client' as const,
+    room_number: (user as any).room_number as number | undefined,
     redirectPath: '/hotel-clients' as const,
   })),
   ...personnelStore.users.map((user) => ({
@@ -47,7 +48,6 @@ const knownUsers: KnownUser[] = [
       .replace(/\s+/g, ' ')
       .trim(),
     role: 'administrator' as const,
-    room_number: (user as any).room_number as number | undefined,
     redirectPath: '/office-personnel' as const,
   })),
 ]
@@ -96,14 +96,13 @@ const handleSubmit = () => {
       // Redirect based on role (use redirectPath and pass the name as a query parameter to avoid params type error)
 
       console.log('Matched user:', matchedUser.room_number)
+
       router.push({
         path: matchedUser.redirectPath,
         query: {
           name: matchedUser.fullNameNormalized,
           room_number:
-            matchedUser.role.toLocaleLowerCase() === 'client'
-              ? Number(matchedUser.room_number)
-              : undefined,
+            matchedUser.role.toLocaleLowerCase() === 'client' ? matchedUser.room_number : undefined,
         },
       })
     } else {

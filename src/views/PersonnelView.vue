@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
+import { STAFF_SERVICES } from '@/constants/hotelServices'
+
+const services = ref(STAFF_SERVICES)
 
 const route = useRoute()
 
@@ -10,51 +13,24 @@ const nameDecoded = computed(() => {
 </script>
 
 <template>
-  <div
-    class="min-h-screen bg-linear-to-br from-rose-950 to-purple-950 text-white flex items-center justify-center p-6"
-  >
-    <div class="max-w-4xl text-center">
-      <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-8">
-        Office Personnel Dashboard
+  <div class="page-wrapper p-5! bg-gray-100 font-sans">
+    <!-- Main content -->
+    <div class="bg-gray-100 mt-10">
+      <h1 class="text-3xl font-bold text-gray-900 mb-5">
+        Welcome to our Awesome Hotel, {{ nameDecoded }}! How are you today?
       </h1>
+      <h2 class="text-xl font-semibold py-5 text-gray-800">In-Hotel Services</h2>
 
-      <p>Welcome back to the Office Personnel Dashboard, {{ nameDecoded }}</p>
-
-      <p class="text-xl md:text-2xl opacity-90 mb-12">
-        Manage schedules, desks, meetings, access rights, and team availability.
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-3 gap-2">
         <div
-          class="bg-gray-900/50 backdrop-blur-md p-8 rounded-2xl border border-white/10 hover:border-rose-500/50 transition-all"
+          v-for="service in services"
+          :key="service.title"
+          class="flex flex-col items-center text-center gap-2 py-3 px-2 rounded-2xl bg-white hover:bg-indigo-600/15 active:bg-indigo-600/35 transition-colors"
         >
-          <h3 class="text-2xl font-bold mb-4">Active Staff</h3>
-          <p class="text-4xl font-black">142</p>
-          <p class="text-sm opacity-70">Currently on-site</p>
-        </div>
-
-        <div
-          class="bg-gray-900/50 backdrop-blur-md p-8 rounded-2xl border border-white/10 hover:border-rose-500/50 transition-all"
-        >
-          <h3 class="text-2xl font-bold mb-4">Free Desks</h3>
-          <p class="text-4xl font-black">38</p>
-          <p class="text-sm opacity-70">Available today</p>
-        </div>
-
-        <div
-          class="bg-gray-900/50 backdrop-blur-md p-8 rounded-2xl border border-white/10 hover:border-rose-500/50 transition-all"
-        >
-          <h3 class="text-2xl font-bold mb-4">Upcoming Meetings</h3>
-          <p class="text-4xl font-black">7</p>
-          <p class="text-sm opacity-70">Next 24 hours</p>
+          <div class="text-3xl">{{ service.icon }}</div>
+          <span class="text-sm text-gray-700 font-medium leading-tight">{{ service.title }}</span>
         </div>
       </div>
-
-      <button
-        class="mt-12 px-10 py-5 bg-rose-600 hover:bg-rose-700 rounded-xl text-xl font-semibold transition shadow-lg"
-      >
-        Open Full Dashboard →
-      </button>
     </div>
   </div>
 </template>
