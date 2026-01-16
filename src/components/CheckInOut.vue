@@ -37,14 +37,12 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
     </div>
   </div>
 
-  <div
-    class="page-wrapper p-6! relative h-[750px] w-full rounded-xl overflow-hidden border-gray-200 shadow-lg"
-  >
+  <div class="page-wrapper relative h-[600px] md:h-[750px] w-full rounded-2xl overflow-hidden">
     <!-- Floor selection -->
     <select
       id="select-a-floor"
       v-model="hotelStore.currentFloorId"
-      class="absolute top-9 left-20 z-100 p-2 bg-white text-black rounded shadow text-sm font-medium border border-gray-300"
+      class="absolute top-8 left-18 z-100 p-2 bg-white text-black rounded shadow text-sm font-medium border border-gray-300 focus:outline-none"
     >
       <option v-for="floor in hotelStore.floors" :key="floor.id" :value="floor.id">
         {{ floor.name }}
@@ -53,7 +51,7 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
 
     <!-- Status filters -->
     <div
-      class="absolute top-10 right-10 z-100 flex flex-col gap-2 bg-white p-3 rounded shadow border border-gray-300"
+      class="absolute top-8 right-8 z-100 flex flex-col gap-2 bg-white p-3 rounded shadow border border-gray-300"
     >
       <label
         v-for="status in ['free', 'occupied', 'reserved', 'maintenance']"
@@ -119,7 +117,7 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
       :min-zoom="0.5"
       :zoom-control="true"
       :attribution-control="false"
-      class="h-full w-full"
+      class="h-full w-full rounded-2xl border-6 border-white"
     >
       <!-- Background – image of the current floor -->
       <l-image-overlay

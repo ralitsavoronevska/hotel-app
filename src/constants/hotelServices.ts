@@ -39,6 +39,7 @@ export const GUEST_SERVICES: HotelService[] = [
 
 export const STAFF_SERVICES: HotelService[] = [
   { icon: '📅', title: 'Reservation Management' },
+  { icon: '📅', title: 'Personal Working Schedule' },
   { icon: '🛌', title: 'Room Assignment & Blocking' },
   { icon: '🏁', title: 'Check-in / Check-out Operations' },
   { icon: '🧹', title: 'Housekeeping Status & Tasks' },
