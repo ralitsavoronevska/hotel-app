@@ -163,7 +163,7 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
 </template>
 
 <style>
-/* Подобряване на popup изгледа */
+/* Upgrading the popup appearance */
 :deep(.leaflet-popup-content-wrapper) {
   border-radius: 12px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
@@ -172,7 +172,7 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
 :deep(.leaflet-popup-tip) {
   background: white;
 }
-/* Задължително за Leaflet в Vue/Vite */
+/* Mandatory for Leaflet in Vue/Vite */
 :deep(.leaflet-container) {
   height: 100% !important;
   width: 100% !important;
@@ -183,22 +183,22 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
   width: 100%;
 }
 
-/* Поправка за видими полигони */
+/* Fix for visible polygons */
 :deep(.leaflet-interactive) {
   pointer-events: auto !important;
   cursor: pointer;
 }
 
-/* По-добър вид на path (полигони) */
+/* Better appearance for path (polygons) */
 :deep(path.leaflet-interactive) {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-/* Ако полигоните все още са "плоски" – форсирай fill */
+/* If polygons are still "flat" – force fill */
 :deep(.leaflet-overlay-pane svg g path) {
   fill-opacity: 0.45 !important;
   stroke-opacity: 1 !important;
-  stroke-width: 3 !important; /* Увеличи дебелината на контура за тестване */
+  stroke-width: 3 !important; /* Increase stroke width for testing */
 }
 </style>
