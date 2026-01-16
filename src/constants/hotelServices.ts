@@ -3,7 +3,6 @@
 export interface HotelService {
   icon: string // emoji or icon name/class
   title: string
-  description?: string // optional short text
 }
 
 // ────────────────────────────────────────────────
