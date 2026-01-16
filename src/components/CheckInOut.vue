@@ -44,7 +44,7 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
     <select
       id="select-a-floor"
       v-model="hotelStore.currentFloorId"
-      class="absolute top-9 left-20 z-1000 p-2 bg-white text-black rounded shadow text-sm font-medium border border-gray-300"
+      class="absolute top-9 left-20 z-100 p-2 bg-white text-black rounded shadow text-sm font-medium border border-gray-300"
     >
       <option v-for="floor in hotelStore.floors" :key="floor.id" :value="floor.id">
         {{ floor.name }}
@@ -53,7 +53,7 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
 
     <!-- Status filters -->
     <div
-      class="absolute top-10 right-10 z-1000 flex flex-col gap-2 bg-white text-black p-3 rounded shadow border border-gray-300"
+      class="absolute top-10 right-10 z-100 flex flex-col gap-2 bg-white p-3 rounded shadow border border-gray-300"
     >
       <label
         v-for="status in ['free', 'occupied', 'reserved', 'maintenance']"
@@ -72,8 +72,23 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
           "
           class="mr-2!"
         />
+        <div
+          class="w-[12px] h-[12px] font-semibold mr-2!"
+          :class="{
+            'bg-[#22c55e]': status === 'free',
+            'bg-[#ef4444]': status === 'occupied',
+            'bg-[#3b82f6]': status === 'reserved',
+            'bg-[#eab308]': status === 'maintenance',
+          }"
+        ></div>
         <span
-          :class="`text-${status === 'free' ? 'green' : status === 'occupied' ? 'red' : status === 'reserved' ? 'blue' : 'yellow'}-700`"
+          class="font-semibold"
+          :class="{
+            'text-[#22c55e]': status === 'free',
+            'text-[#ef4444]': status === 'occupied',
+            'text-[#3b82f6]': status === 'reserved',
+            'text-[#eab308]': status === 'maintenance',
+          }"
         >
           {{
             status === 'free'
@@ -136,7 +151,13 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
             <p class="mb-1">
               Status:
               <span
-                :class="`font-semibold text-${room.status === 'free' ? 'green' : room.status === 'occupied' ? 'red' : room.status === 'reserved' ? 'blue' : 'yellow'}-700`"
+                class="font-semibold"
+                :class="{
+                  'text-[#22c55e]': room.status === 'free',
+                  'text-[#ef4444]': room.status === 'occupied',
+                  'text-[#3b82f6]': room.status === 'reserved',
+                  'text-[#eab308]': room.status === 'maintenance',
+                }"
               >
                 {{
                   room.status === 'free'
