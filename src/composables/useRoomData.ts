@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-import { ROOM_IMAGES, type RoomImage } from '@/data/roomData'
+import { ROOM_IMAGES, type RoomImage } from '@/constants/roomData'
 
 export function useRoomData() {
   const images = ref<RoomImage[]>(ROOM_IMAGES)

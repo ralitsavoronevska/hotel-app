@@ -1,15 +1,29 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ref, computed } from 'vue'
 import { STAFF_SERVICES } from '@/constants/hotelServices'
 
 const services = ref(STAFF_SERVICES)
 
 const route = useRoute()
+const router = useRouter()
 
 const nameDecoded = computed(() => {
   return decodeURIComponent((route.query.name as string) || '')
 })
+
+// Click handler for any service – but special for Check-in/Check-out
+const handleServiceClick = (service: { title: string }) => {
+  if (service.title === 'Check-in / Check-out Operations') {
+    router.push({
+      path: '/check-in-out',
+      query: { name: route.query.name }, // pass guest name forward
+    })
+  } else {
+    // Optional: handle other services later (modal, alert, etc.)
+    alert(`Opening ${service.title}... (to be implemented)`)
+  }
+}
 </script>
 
 <template>
@@ -26,6 +40,7 @@ const nameDecoded = computed(() => {
           v-for="service in services"
           :key="service.title"
           class="flex flex-col items-center text-center gap-2 py-3 px-2 rounded-2xl bg-white hover:bg-indigo-600/15 active:bg-indigo-600/35 transition-colors"
+          @click="handleServiceClick(service)"
         >
           <div class="text-3xl">{{ service.icon }}</div>
           <span class="text-sm text-gray-700 font-medium leading-tight">{{ service.title }}</span>

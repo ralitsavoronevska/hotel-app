@@ -120,8 +120,8 @@ const handleSubmit = () => {
     >
       <div class="text-center">
         <h2 class="text-3xl font-bold text-gray-900">Enter Your Full Name</h2>
-        <p class="mt-2 text-sm text-gray-600">
-          Please provide your first name, middle name(s) if any, and family name.
+        <p class="py-5 text-sm text-gray-600">
+          Please, provide your first name, middle name(s) and family name.
         </p>
       </div>
 
@@ -129,7 +129,7 @@ const handleSubmit = () => {
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <!-- First Name -->
           <div>
-            <label for="first-name" class="block text-sm font-medium text-gray-700">
+            <label for="first-name" class="block text-sm font-medium text-gray-700 pb-3">
               First Name *
             </label>
             <input
@@ -138,7 +138,7 @@ const handleSubmit = () => {
               type="text"
               autocomplete="given-name"
               required
-              class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-3 transition-colors"
+              class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-600 focus:outline-indigo-600 sm:text-sm px-4 py-3 transition-colors"
               :class="{ 'border-red-500 ring-red-500': firstName && !isFirstNameValid }"
               placeholder="e.g. Anna"
             />
@@ -149,7 +149,7 @@ const handleSubmit = () => {
 
           <!-- Middle Name(s) -->
           <div>
-            <label for="middle-names" class="block text-sm font-medium text-gray-700">
+            <label for="middle-names" class="block text-sm font-medium text-gray-700 pb-3">
               Middle Name(s)
             </label>
             <input
@@ -157,7 +157,7 @@ const handleSubmit = () => {
               v-model="middleNames"
               type="text"
               autocomplete="additional-name"
-              class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-3 transition-colors"
+              class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-600 focus:outline-indigo-600 sm:text-sm px-4 py-3 transition-colors"
               :class="{ 'border-red-500 ring-red-500': middleNames && !isMiddleNamesValid }"
               placeholder="e.g. Maria Ivanova"
             />
@@ -168,8 +168,8 @@ const handleSubmit = () => {
         </div>
 
         <!-- Family Name -->
-        <div>
-          <label for="family-name" class="block text-sm font-medium text-gray-700">
+        <div class="py-5">
+          <label for="family-name" class="block text-sm font-medium text-gray-700 pb-3">
             Family Name / Surname *
           </label>
           <input
@@ -178,7 +178,7 @@ const handleSubmit = () => {
             type="text"
             autocomplete="family-name"
             required
-            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-3 transition-colors"
+            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-600 focus:outline-indigo-600 sm:text-sm px-4 py-3 transition-colors"
             :class="{ 'border-red-500 ring-red-500': familyName && !isFamilyNameValid }"
             placeholder="e.g. Petrova"
           />
@@ -191,7 +191,7 @@ const handleSubmit = () => {
         <div class="pt-4">
           <button
             type="submit"
-            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             :disabled="!isFirstNameValid || !isFamilyNameValid"
           >
             Submit
@@ -201,11 +201,3 @@ const handleSubmit = () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-/* Optional: nicer focus ring */
-input:focus {
-  outline: none;
-  /* ring: 2px solid theme('colors.indigo.500'); */
-}
-</style>

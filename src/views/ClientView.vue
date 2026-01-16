@@ -15,7 +15,10 @@ const nameDecoded = computed(() => {
 const room_number = computed(() => route.query.room_number as number | undefined)
 
 const capitalize = (s: string) => {
-  return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''
+  return s
+    .split(/\s+/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
 }
 
 const name = computed(() => capitalize(nameDecoded.value))
@@ -26,13 +29,16 @@ const name = computed(() => capitalize(nameDecoded.value))
     <RoomImagesCarousel />
 
     <!-- Main content -->
-    <div class="bg-gray-100 mt-10">
-      <h1 class="text-3xl font-bold text-gray-900 mb-5">Room {{ room_number }}</h1>
-      <p class="text-gray-700 mb-8">
-        Welcome to our Awesome Hotel, {{ name }}! Explore our exclusive in-hotel services designed
-        to make your stay unforgettable.
-      </p>
-      <h2 class="text-xl font-semibold py-5 text-gray-800">In-Hotel Services</h2>
+    <div class="bg-gray-100 py-5">
+      <div class="p-5 rounded-2xl bg-white">
+        <h1 class="text-3xl font-bold text-gray-900 gradient-text mb-5">Room {{ room_number }}</h1>
+        <p class="text-xl text-gray-700 pt-5">
+          Welcome to our Awesome Hotel, <span class="gradient-text">{{ name }}</span
+          >!<br />
+          Explore our exclusive in-hotel services designed to make your stay unforgettable.
+        </p>
+      </div>
+      <h2 class="text-xl font-semibold pt-10 pb-5 text-gray-800">In-Hotel Services</h2>
 
       <div class="grid grid-cols-3 gap-2">
         <div
@@ -46,7 +52,7 @@ const name = computed(() => capitalize(nameDecoded.value))
       </div>
 
       <!-- Contact Support section -->
-      <div class="mt-10">
+      <div class="pt-10 pb-5">
         <h2 class="text-xl font-semibold py-5 text-gray-800">Contact Support</h2>
         <div
           class="bg-white rounded-2xl p-5 flex items-center justify-between cursor-pointer active:bg-indigo-600/35 transition-colors"

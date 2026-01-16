@@ -23,12 +23,14 @@ const goToVerificationForm = () => router.push('/verification-form')
       <!-- Left side (bottom-left triangle) -->
       <div
         class="w-full h-full flex flex-1 flex-col items-center justify-center text-center bg-linear-to-br from-indigo-900 to-purple-900"
-        :class="{ 'scale-[1.02] brightness-110': isHovered }"
-        @click="goToVerificationForm"
-        @mouseenter="isHovered = true"
-        @mouseleave="isHovered = false"
       >
-        <div class="max-w-md px-8">
+        <div
+          class="max-w-md px-8"
+          :class="{ 'cursor-pointer': isHovered }"
+          @click="goToVerificationForm"
+          @mouseenter="isHovered = true"
+          @mouseleave="isHovered = false"
+        >
           <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-10">Hotel Clients</h1>
           <p class="text-xl md:text-2xl opacity-90">Enter the hotel management system</p>
         </div>
@@ -37,12 +39,14 @@ const goToVerificationForm = () => router.push('/verification-form')
       <!-- Right side (top-right triangle) – clipped -->
       <div
         class="w-full h-full flex flex-1 flex-col items-center justify-center text-center bg-linear-to-br from-purple-900 to-pink-900"
-        :class="{ 'scale-[1.02] brightness-110': isHovered }"
-        @click="goToVerificationForm"
-        @mouseenter="isHovered = true"
-        @mouseleave="isHovered = false"
       >
-        <div class="max-w-md px-8">
+        <div
+          class="max-w-md px-8"
+          :class="{ 'cursor-pointer': isHovered }"
+          @click="goToVerificationForm"
+          @mouseenter="isHovered = true"
+          @mouseleave="isHovered = false"
+        >
           <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-10">Office Personnel</h1>
           <p class="text-xl md:text-2xl opacity-90">Manage office operations efficiently</p>
         </div>
@@ -51,7 +55,7 @@ const goToVerificationForm = () => router.push('/verification-form')
 
     <!-- Pulsating centered logo -->
     <div class="absolute left-1/2 top-[50%] -translate-x-1/2 -translate-y-1/2 z-100">
-      <div class="relative w-24 h-24 md:w-48 md:h-48">
+      <div class="relative w-24 h-24">
         <!-- Pulsating outer glow -->
         <div
           class="absolute inset-0 rounded-full bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-40 animate-pulse-glow"
@@ -65,7 +69,7 @@ const goToVerificationForm = () => router.push('/verification-form')
         <!-- Main circle -->
         <div class="absolute inset-2 bg-gray-300 rounded-full flex items-center justify-center">
           <span
-            class="text-6xl md:text-[10rem] font-black bg-linear-to-br from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+            class="text-6xl font-black bg-linear-to-br from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
             >A</span
           >
         </div>
