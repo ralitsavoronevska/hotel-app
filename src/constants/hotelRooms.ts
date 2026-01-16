@@ -24,7 +24,7 @@ export const useHotelRoomsStore = defineStore('hotelRooms', {
       {
         id: 1,
         name: 'Floor 1',
-        image: 'public/floorplan-level-1.jpg',
+        image: '/floorplan-level-1.jpg',
         bounds: [
           [0, 0],
           [550, 510],
@@ -83,7 +83,7 @@ export const useHotelRoomsStore = defineStore('hotelRooms', {
       {
         id: 2,
         name: 'Floor 2',
-        image: 'public/floorplan-level-2.jpg',
+        image: '/floorplan-level-2.jpg',
         bounds: [
           [0, 0],
           [550, 510],
