@@ -2,18 +2,15 @@
 import { ref, watch } from 'vue'
 import { LMap, LImageOverlay, LPolygon, LPopup, LTooltip } from '@vue-leaflet/vue-leaflet'
 import 'leaflet/dist/leaflet.css'
-import { useHotelStore } from '@/stores/hotel' // Път към store-а
+import { useHotelRoomsStore } from '@/constants/hotelRooms'
 import 'leaflet/dist/leaflet.css'
 
-// Важно: Leaflet очаква този клас на body или root
-document.body.classList.add('leaflet-container-custom')
+const hotelStore = useHotelRoomsStore()
 
-const hotelStore = useHotelStore()
-
-// Карта ref за актуализации
+// Map ref for updates
 const mapRef = ref<any>(null)
 
-// Цветове според статус
+// Colors based on status
 const statusColors = {
   free: '#22c55e',
   occupied: '#ef4444',
@@ -23,32 +20,40 @@ const statusColors = {
 
 const getColor = (status: string) => statusColors[status as keyof typeof statusColors] || '#6b7280'
 
-// Актуализация на картата при смяна на етаж или филтри
+// Update map on floor change or filters
 watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () => {
   if (mapRef.value) {
-    mapRef.value.leafletObject.invalidateSize() // Актуализирай размера и слоевете
+    mapRef.value.leafletObject.invalidateSize() // Update size and layers
   }
 })
 </script>
 
 <template>
+  <div class="page-wrapper p-0">
+    <div class="p-5 rounded-2xl bg-white">
+      <h1 class="text-xl font-bold text-gray-900 mb-5 gradient-text">
+        Check-in / Check-out Operations
+      </h1>
+    </div>
+  </div>
+
   <div
-    class="page-wrapper p-6! relative h-[500px] w-full rounded-xl overflow-hidden border-gray-200 shadow-lg"
+    class="page-wrapper p-6! relative h-[750px] w-full rounded-xl overflow-hidden border-gray-200 shadow-lg"
   >
-    <!-- Избор на етаж -->
+    <!-- Floor selection -->
     <select
       id="select-a-floor"
       v-model="hotelStore.currentFloorId"
-      class="absolute top-4 left-4 z-1000 p-2 bg-white text-black rounded shadow text-sm font-medium border border-gray-300"
+      class="absolute top-9 left-20 z-1000 p-2 bg-white text-black rounded shadow text-sm font-medium border border-gray-300"
     >
       <option v-for="floor in hotelStore.floors" :key="floor.id" :value="floor.id">
         {{ floor.name }}
       </option>
     </select>
 
-    <!-- Филтри за статус -->
+    <!-- Status filters -->
     <div
-      class="absolute top-4 right-4 z-1000 flex flex-col gap-2 bg-white text-black p-3 rounded shadow border border-gray-300"
+      class="absolute top-10 right-10 z-1000 flex flex-col gap-2 bg-white text-black p-3 rounded shadow border border-gray-300"
     >
       <label
         v-for="status in ['free', 'occupied', 'reserved', 'maintenance']"
@@ -83,7 +88,8 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
       </label>
     </div>
 
-    <!-- Картата -->
+    <!-- The map -->
+
     <l-map
       ref="mapRef"
       :use-global-leaflet="false"
@@ -100,14 +106,14 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
       :attribution-control="false"
       class="h-full w-full"
     >
-      <!-- Фон – изображение на текущия етаж -->
+      <!-- Background – image of the current floor -->
       <l-image-overlay
         v-if="hotelStore.currentFloor"
         :url="hotelStore.currentFloor.image"
         :bounds="hotelStore.currentFloor.bounds"
       />
 
-      <!-- Стаи като полигони (филтрирани) -->
+      <!-- Rooms as polygons (filtered) -->
       <l-polygon
         v-for="room in hotelStore.filteredRooms"
         :key="room.id"
@@ -118,28 +124,28 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
         :weight="2"
         :interactive="true"
       >
-        <!-- Tooltip при hover -->
+        <!-- Tooltip on hover -->
         <l-tooltip :permanent="false" direction="top">
           {{ room.name }}
         </l-tooltip>
 
-        <!-- Popup при клик -->
+        <!-- Popup on click -->
         <l-popup :auto-pan="true">
           <div class="text-sm font-medium">
             <h3 class="font-bold text-base mb-1">{{ room.name }}</h3>
             <p class="mb-1">
-              Статус:
+              Status:
               <span
                 :class="`font-semibold text-${room.status === 'free' ? 'green' : room.status === 'occupied' ? 'red' : room.status === 'reserved' ? 'blue' : 'yellow'}-700`"
               >
                 {{
                   room.status === 'free'
-                    ? 'Свободна'
+                    ? 'Free'
                     : room.status === 'occupied'
-                      ? 'Заета'
+                      ? 'Occupied'
                       : room.status === 'reserved'
-                        ? 'Резервирана'
-                        : 'Поддръжка'
+                        ? 'Reserved'
+                        : 'In Maintenance'
                 }}
               </span>
             </p>
@@ -147,7 +153,7 @@ watch([() => hotelStore.currentFloorId, () => hotelStore.selectedStatuses], () =
             <button
               class="mt-2 px-3 py-1 bg-indigo-600 text-white text-xs rounded hover:bg-indigo-700"
             >
-              Резервирай / Детайли
+              Reserve / Details
             </button>
           </div>
         </l-popup>

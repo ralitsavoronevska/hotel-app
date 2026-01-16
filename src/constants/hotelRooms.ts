@@ -18,7 +18,7 @@ interface Floor {
   rooms: Room[]
 }
 
-export const useHotelStore = defineStore('hotel', {
+export const useHotelRoomsStore = defineStore('hotelRooms', {
   state: () => ({
     floors: [
       {
@@ -27,7 +27,7 @@ export const useHotelStore = defineStore('hotel', {
         image: 'public/floorplan-level-1.jpg',
         bounds: [
           [0, 0],
-          [551, 511],
+          [550, 510],
         ],
         rooms: [
           {
@@ -35,10 +35,10 @@ export const useHotelStore = defineStore('hotel', {
             name: 'Room 101 - Standard',
             status: 'free',
             coords: [
-              [50, 50],
-              [50, 500],
-              [500, 500],
-              [500, 50],
+              [73, 0], // bottom-left
+              [210, 0], // bottom-right
+              [210, 220], // top-right
+              [73, 220], // top-left
             ],
             details: 'Capacity: 2 persons • Bed: double',
           },
@@ -47,10 +47,10 @@ export const useHotelStore = defineStore('hotel', {
             name: 'Room 102 - Deluxe',
             status: 'occupied',
             coords: [
-              [220, 100],
-              [220, 200],
-              [320, 200],
-              [320, 100],
+              [73, 295], // bottom-left
+              [73, 510], // bottom-right
+              [210, 510], // top-right
+              [210, 295], // top-left
             ],
             details: 'Occupied until 15:00 • Guest: Ivanov',
           },
@@ -59,10 +59,10 @@ export const useHotelStore = defineStore('hotel', {
             name: 'Room 103 - Apartment',
             status: 'reserved',
             coords: [
-              [340, 100],
-              [340, 250],
-              [500, 250],
-              [500, 100],
+              [72, 0], // bottom-left
+              [0, 0], // bottom-right
+              [0, 256], // top-right
+              [72, 256], // top-left
             ],
             details: 'Reserved for January 18–20',
           },
@@ -71,10 +71,10 @@ export const useHotelStore = defineStore('hotel', {
             name: 'Room 104 - In Maintenance',
             status: 'maintenance',
             coords: [
-              [100, 220],
-              [100, 320],
-              [250, 320],
-              [250, 220],
+              [0, 260], // bottom-left
+              [0, 510], // bottom-right
+              [72, 510], // top-right
+              [72, 260], // top-left
             ],
             details: 'Cleaning until 14:00',
           },
@@ -86,7 +86,7 @@ export const useHotelStore = defineStore('hotel', {
         image: 'public/floorplan-level-2.jpg',
         bounds: [
           [0, 0],
-          [538, 506],
+          [550, 510],
         ],
         rooms: [
           {
@@ -94,10 +94,10 @@ export const useHotelStore = defineStore('hotel', {
             name: 'Room 201 - Superior',
             status: 'free',
             coords: [
-              [50, 50],
-              [50, 150],
-              [150, 150],
-              [150, 50],
+              [73, 0], // bottom-left
+              [210, 0], // bottom-right
+              [210, 220], // top-right
+              [73, 220], // top-left
             ],
             details: 'Capacity: 4 persons • Balcony: Yes',
           },
@@ -106,12 +106,36 @@ export const useHotelStore = defineStore('hotel', {
             name: 'Room 202 - Family',
             status: 'occupied',
             coords: [
-              [170, 50],
-              [170, 150],
-              [270, 150],
-              [270, 50],
+              [73, 295], // bottom-left
+              [73, 510], // bottom-right
+              [210, 510], // top-right
+              [210, 295], // top-left
             ],
             details: 'Occupied by family',
+          },
+          {
+            id: '203',
+            name: 'Room 203 - Suite',
+            status: 'free',
+            coords: [
+              [72, 0], // bottom-left
+              [0, 0], // bottom-right
+              [0, 256], // top-right
+              [72, 256], // top-left
+            ],
+            details: 'Capacity: 4 persons • Balcony: Yes',
+          },
+          {
+            id: '204',
+            name: 'Room 204 - Presidential Suite',
+            status: 'reserved',
+            coords: [
+              [0, 260], // bottom-left
+              [0, 510], // bottom-right
+              [72, 510], // top-right
+              [72, 260], // top-left
+            ],
+            details: 'Reserved for VIP guest',
           },
         ],
       },

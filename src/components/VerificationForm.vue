@@ -80,7 +80,7 @@ const handleSubmit = () => {
   errorMessage.value = null
 
   if (!isFormValid.value) {
-    errorMessage.value = 'First and family name are required (min 2 characters each).'
+    errorMessage.value = 'First, middle and family names are required.'
     return
   }
 
@@ -187,12 +187,24 @@ const handleSubmit = () => {
           </p>
         </div>
 
+        <div class="mt-6">
+          <transition name="fade">
+            <div
+              v-if="errorMessage"
+              class="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg text-sm font-medium text-center"
+              role="alert"
+            >
+              {{ errorMessage }}
+            </div>
+          </transition>
+        </div>
+
         <!-- Submit button -->
         <div class="pt-4">
           <button
             type="submit"
             class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            :disabled="!isFirstNameValid || !isFamilyNameValid"
+            :disabled="!isFirstNameValid || !isMiddleNamesValid || !isFamilyNameValid"
           >
             Submit
           </button>
@@ -201,3 +213,14 @@ const handleSubmit = () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

@@ -12,6 +12,15 @@ const nameDecoded = computed(() => {
   return decodeURIComponent((route.query.name as string) || '')
 })
 
+const capitalize = (s: string) => {
+  return s
+    .split(/\s+/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
+
+const name = computed(() => capitalize(nameDecoded.value))
+
 // Click handler for any service – but special for Check-in/Check-out
 const handleServiceClick = (service: { title: string }) => {
   if (service.title === 'Check-in / Check-out Operations') {
@@ -30,9 +39,13 @@ const handleServiceClick = (service: { title: string }) => {
   <div class="page-wrapper p-5! bg-gray-100 font-sans">
     <!-- Main content -->
     <div class="bg-gray-100 mt-10">
-      <h1 class="text-3xl font-bold text-gray-900 mb-5">
-        Welcome to our Awesome Hotel, {{ nameDecoded }}! How are you today?
-      </h1>
+      <div class="p-5 rounded-2xl bg-white">
+        <h1 class="text-xl font-bold text-gray-900 mb-5">
+          Welcome back to our Awesome Hotel Management System,
+          <span class="gradient-text">{{ name }}!</span> How are you today?
+        </h1>
+      </div>
+
       <h2 class="text-xl font-semibold py-5 text-gray-800">In-Hotel Services</h2>
 
       <div class="grid grid-cols-3 gap-2">
